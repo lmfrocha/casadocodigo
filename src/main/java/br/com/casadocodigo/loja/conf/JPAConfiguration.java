@@ -29,7 +29,6 @@ public class JPAConfiguration {
 		dataSource.setUrl("jdbc:mysql://localhost/casadocodigo?useSSL=false&serverTimezone=UTC");
 		dataSource.setDriverClassName("com.mysql.jdbc.Driver");
 		
-		
 		Properties props = new Properties();
 		props.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL5Dialect");
 		props.setProperty("hibernate.show_sql", "true");
