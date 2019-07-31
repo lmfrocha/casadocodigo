@@ -12,24 +12,21 @@ import br.com.casadocodigo.loja.model.Produto;
 
 @Repository
 @Transactional
-public class ProdutoDao {
+public class ProdutoDAO {
 
 	@PersistenceContext
-	private EntityManager entityManager;
-
+	private EntityManager manager;
+	
 	public void gravar(Produto produto) {
-		entityManager.persist(produto);
+		manager.persist(produto);
 	}
 
 	public List<Produto> listar() {
-		return entityManager.createQuery("select p from Produto p", Produto.class).getResultList();
+		return manager.createQuery("select p from Produto p", Produto.class)
+				.getResultList();
 	}
 
 	public Produto find(Integer id) {
-		return entityManager.createQuery("select distinct(p) from Produto p"
-				+ " join fetch p.precos preco where p.id = :id ",Produto.class)
-				.setParameter("id", id)
-				.getSingleResult();
+        return manager.createQuery("select distinct(p) from Produto p join fetch p.precos precos where p.id = :id", Produto.class).setParameter("id", id).getSingleResult();
 	}
-
 }
