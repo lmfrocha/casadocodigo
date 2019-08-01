@@ -38,8 +38,7 @@
 
 					<ul class="clearfix">
 						<li>
-						<h1>${contextPath}</h1>
-							<a href="/carrinho" rel="nofollow">
+							<a href="${s:mvcUrl('CCC#itens').build() }" rel="nofollow">
 								Carrinho (${carrinhoCompras.quantidade })
 							</a>
 						</li>
