@@ -18,9 +18,8 @@ public class Usuario implements UserDetails {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	private String nome;
-
 	private String email;
+	private String nome;
 	private String senha;
 	
 	@OneToMany(fetch=FetchType.EAGER)
@@ -58,6 +57,10 @@ public class Usuario implements UserDetails {
 		this.roles = roles;
 	}
 
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		return this.roles;
@@ -70,8 +73,7 @@ public class Usuario implements UserDetails {
 
 	@Override
 	public String getUsername() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.email;
 	}
 
 	@Override
@@ -93,5 +95,6 @@ public class Usuario implements UserDetails {
 	public boolean isEnabled() {
 		return true;
 	}
+	
 
 }
