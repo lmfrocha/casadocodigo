@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 import br.com.casadocodigo.loja.model.Usuario;
 
 @Repository
-public class UsuarioDao implements UserDetailsService{
+public class UsuarioDAO implements UserDetailsService{
 
 	@PersistenceContext
 	private EntityManager entityManager;
