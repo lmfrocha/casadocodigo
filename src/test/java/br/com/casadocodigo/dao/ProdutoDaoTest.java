@@ -19,6 +19,7 @@ import br.com.casadocodigo.loja.model.Produto;
 import br.com.casadocodigo.loja.model.TipoPreco;
 import junit.framework.Assert;
 
+@SuppressWarnings("deprecation")
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = { JPAConfiguration.class, ProdutoDAO.class, DataSourceConfigurationTest.class })
 @ActiveProfiles("test")
@@ -29,7 +30,6 @@ public class ProdutoDaoTest {
 
 	@Test
 	@Transactional
-	@SuppressWarnings("deprecation")
 	public void somaTodosPrecosPorTipoLivro() {
 
 		List<Produto> livrosImpressos = ProdutoBuilder.newProduto(TipoPreco.IMPRESSO, BigDecimal.TEN).more(3)
