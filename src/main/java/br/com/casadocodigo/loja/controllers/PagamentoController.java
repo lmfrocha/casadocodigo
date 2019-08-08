@@ -3,6 +3,7 @@ package br.com.casadocodigo.loja.controllers;
 import java.util.concurrent.Callable;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,6 +27,9 @@ public class PagamentoController {
 	@Autowired
 	RestTemplate restTemplate;
 	
+	@Autowired
+	private MailSender sender;
+	
 	@RequestMapping(value="/finalizar", method=RequestMethod.POST)
 	public Callable<ModelAndView>  finalizar(RedirectAttributes model){
 		return () -> {
@@ -48,11 +52,10 @@ public class PagamentoController {
 	public void enviaEmailToUsuario(Usuario usuario) {
 		SimpleMailMessage email = new SimpleMailMessage();
 		email.setSubject("Compra Finalizada");
-		email.setTo(usuario.getEmail());
+		email.setTo("lucas.marcelino@outlook.com");
 		email.setText("Sua compra foi finalizada.");
 		email.setFrom("lucasmarcelinofr@gmail.com");
 		
-		
-		
+		sender.send(email);
 	}
 }
