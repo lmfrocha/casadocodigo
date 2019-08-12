@@ -1,6 +1,7 @@
 package br.com.casadocodigo.loja.dao;
 
 import java.math.BigDecimal;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -10,6 +11,7 @@ import javax.persistence.TypedQuery;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import br.com.casadocodigo.loja.dto.produtoDTO;
 import br.com.casadocodigo.loja.model.Produto;
 import br.com.casadocodigo.loja.model.TipoPreco;
 
@@ -38,6 +40,10 @@ public class ProdutoDAO{
 				+ "join p.precos preco where preco.tipo =:tipoPreco", BigDecimal.class)
 				.setParameter("tipoPreco", tipoPreco);
 		return query.getSingleResult();
+	}
+	
+	public produtoDTO getAllProducts(Calendar dataLancamento) {
+		
 	}
 	
 }
