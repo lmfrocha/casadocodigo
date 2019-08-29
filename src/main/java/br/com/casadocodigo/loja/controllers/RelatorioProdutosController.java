@@ -1,5 +1,6 @@
 package br.com.casadocodigo.loja.controllers;
 
+import java.util.Calendar;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -18,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.casadocodigo.loja.dao.ProdutoDAO;
+import br.com.casadocodigo.loja.dto.ProdutoDTO;
 import br.com.casadocodigo.loja.infra.FileSaver;
 import br.com.casadocodigo.loja.model.Produto;
 import br.com.casadocodigo.loja.model.TipoPreco;
@@ -37,9 +39,15 @@ public class RelatorioProdutosController {
 
 	@RequestMapping(method=RequestMethod.GET)
 	public ModelAndView listar() {
-		List<Produto> produtos = dao.listar();
+		ProdutoDTO relatorio = new ProdutoDTO();
 		ModelAndView modelAndView = new ModelAndView("produtos/lista");
-		modelAndView.addObject("produtos", produtos);
+		
+		relatorio.setDataGeracao(Calendar.getInstance());
+		relatorio.setQuantidade(dao.getQuantidadeDeProdutosCadastrados().intValue());
+		relatorio.setProdutos(dao.listar());
+		
+		modelAndView.addObject("relatorio", relatorio);
+		
 		return modelAndView;
 	}
 }

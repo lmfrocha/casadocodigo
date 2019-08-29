@@ -6,12 +6,13 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import br.com.casadocodigo.loja.dto.produtoDTO;
+import br.com.casadocodigo.loja.dto.ProdutoDTO;
 import br.com.casadocodigo.loja.model.Produto;
 import br.com.casadocodigo.loja.model.TipoPreco;
 
@@ -42,8 +43,15 @@ public class ProdutoDAO{
 		return query.getSingleResult();
 	}
 	
-	public produtoDTO getAllProducts(Calendar dataLancamento) {
-		
+	public Long getQuantidadeDeProdutosCadastrados() {
+		Query query = null;
+		manager.createQuery(" select count(*) from Produto");
+		return (Long) query.getSingleResult();
 	}
+	
+	
+//	public produtoDTO getAllProducts(Calendar dataLancamento) {
+//		manager.createQuery(" select * from ");
+//	}
 	
 }

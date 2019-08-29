@@ -1,5 +1,7 @@
 package br.com.casadocodigo.loja.controllers;
 
+import java.math.BigDecimal;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -18,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.casadocodigo.loja.dao.ProdutoDAO;
+import br.com.casadocodigo.loja.dto.ProdutoDTO;
 import br.com.casadocodigo.loja.infra.FileSaver;
 import br.com.casadocodigo.loja.model.Produto;
 import br.com.casadocodigo.loja.model.TipoPreco;
@@ -64,7 +67,7 @@ public class ProdutosController {
 		return new ModelAndView("redirect:produtos");
 	}
 	
-	@RequestMapping( method=RequestMethod.GET)
+	@RequestMapping(method=RequestMethod.GET)
 	public ModelAndView listar() {
 		List<Produto> produtos = dao.listar();
 		ModelAndView modelAndView = new ModelAndView("produtos/lista");
@@ -79,6 +82,14 @@ public class ProdutosController {
 	    modelAndView.addObject("produto", produto);
 	    return modelAndView;
 	}
+	
+//	@RequestMapping(value="/relatorio-produtos", method=RequestMethod.GET)
+//	public ModelAndView quantidade() {
+//		ModelAndView modelAndView = new ModelAndView("/produtos/detalhe");
+//		
+//		
+//	}
+	
 	
 //	@RequestMapping("/{id}")
 //	@ResponseBody

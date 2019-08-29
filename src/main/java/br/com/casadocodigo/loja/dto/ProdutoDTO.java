@@ -6,7 +6,7 @@ import java.util.List;
 
 import br.com.casadocodigo.loja.model.Produto;
 
-public class produtoDTO {
+public class ProdutoDTO {
 
 	private Calendar dataGeracao;
 	
@@ -15,15 +15,19 @@ public class produtoDTO {
 	private List<Produto> produtos = new ArrayList<>();
 
 	@Deprecated
-	private void produtoDto() {
+	private void ProdutoDto() {
 
 	}
 	
-	public produtoDTO(Calendar dataGeracao, Integer quantidade, List<Produto> produtos) {
+	public ProdutoDTO(Calendar dataGeracao, Integer quantidade, List<Produto> produtos) {
 		this.dataGeracao = dataGeracao;
 		this.quantidade = quantidade;
 		this.produtos = produtos;
 	}
+
+	public ProdutoDTO() {
+	}
+	
 
 	public Calendar getDataGeracao() {
 		return dataGeracao;
