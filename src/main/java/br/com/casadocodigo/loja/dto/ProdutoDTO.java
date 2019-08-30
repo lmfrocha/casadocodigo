@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import br.com.casadocodigo.loja.model.Produto;
 
 public class ProdutoDTO {
@@ -12,6 +15,7 @@ public class ProdutoDTO {
 	
 	private Integer quantidade;
 	
+	@Fetch(FetchMode.JOIN)
 	private List<Produto> produtos = new ArrayList<>();
 
 	@Deprecated

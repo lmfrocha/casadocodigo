@@ -44,8 +44,7 @@ public class ProdutoDAO{
 	}
 	
 	public Long getQuantidadeDeProdutosCadastrados() {
-		Query query = null;
-		manager.createQuery(" select count(*) from Produto");
+		Query query = manager.createQuery("select count(*) from Produto "); 
 		return (Long) query.getSingleResult();
 	}
 	
