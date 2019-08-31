@@ -28,12 +28,14 @@ public class ProdutoDAO{
 	}
 
 	public List<Produto> listar() {
-		return manager.createQuery("select p from Produto p", Produto.class)
+		return manager.createQuery("select distinct(p) from Produto p join fetch p.precos", Produto.class)
 				.getResultList();
 	}
 
 	public Produto find(Integer id) {
-        return manager.createQuery("select distinct(p) from Produto p join fetch p.precos precos where p.id = :id", Produto.class).setParameter("id", id).getSingleResult();
+        return manager.createQuery("select distinct(p) from Produto p join fetch p.precos precos where p.id = :id", Produto.class)
+        		.setParameter("id", id)
+        		.getSingleResult();
 	}
 
 	public BigDecimal somaPrecoPorTipo(TipoPreco tipoPreco) {
@@ -48,9 +50,10 @@ public class ProdutoDAO{
 		return (Long) query.getSingleResult();
 	}
 	
-	
-//	public produtoDTO getAllProducts(Calendar dataLancamento) {
-//		manager.createQuery(" select * from ");
-//	}
+	public List<Produto> listProdutoByPosDataLancamento(Calendar data) {
+		return manager.createQuery("select distinct(p) from Produto p join fetch p.precos precos where p.dataLancamento > :data",
+				Produto.class)
+				.setParameter("data", data).getResultList();
+	}
 	
 }
