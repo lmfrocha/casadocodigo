@@ -12,7 +12,6 @@ import javax.persistence.TypedQuery;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import br.com.casadocodigo.loja.dto.ProdutoDTO;
 import br.com.casadocodigo.loja.model.Produto;
 import br.com.casadocodigo.loja.model.TipoPreco;
 
@@ -28,32 +27,35 @@ public class ProdutoDAO{
 	}
 
 	public List<Produto> listar() {
-		return manager.createQuery("select distinct(p) from Produto p join fetch p.precos", Produto.class)
-				.getResultList();
+		TypedQuery<Produto> query = manager.createQuery(" select distinct(p) from Produto p "
+				+ " join fetch p.precos ", Produto.class);
+		return query.getResultList();
 	}
 
 	public Produto find(Integer id) {
-        return manager.createQuery("select distinct(p) from Produto p join fetch p.precos precos where p.id = :id", Produto.class)
-        		.setParameter("id", id)
-        		.getSingleResult();
+       TypedQuery<Produto> query = manager.createQuery(" select distinct(p) from Produto p "
+       		+ " join fetch p.precos precos where p.id = :id ", Produto.class)
+        		.setParameter("id", id);
+       return query.getSingleResult();
 	}
 
 	public BigDecimal somaPrecoPorTipo(TipoPreco tipoPreco) {
-		TypedQuery<BigDecimal> query = manager.createQuery("select sum(preco.valor) from Produto p "
-				+ "join p.precos preco where preco.tipo =:tipoPreco", BigDecimal.class)
+		TypedQuery<BigDecimal> query = manager.createQuery(" select sum(preco.valor) from Produto p "
+				+ " join p.precos preco where preco.tipo =:tipoPreco ", BigDecimal.class)
 				.setParameter("tipoPreco", tipoPreco);
 		return query.getSingleResult();
 	}
 	
 	public Long getQuantidadeDeProdutosCadastrados() {
-		Query query = manager.createQuery("select count(*) from Produto "); 
-		return (Long) query.getSingleResult();
+		TypedQuery<Long> query = manager.createQuery(" select count(*) from Produto ", Long.class); 
+		return query.getSingleResult();
 	}
-	
-	public List<Produto> listProdutoByPosDataLancamento(Calendar data) {
-		return manager.createQuery("select distinct(p) from Produto p join fetch p.precos precos where p.dataLancamento > :data",
-				Produto.class)
-				.setParameter("data", data).getResultList();
+
+	public List<Produto> listarPelaDataLancamento(Calendar data) {
+		TypedQuery<Produto> query = manager.createQuery(" select distinct(p) from Produto p "
+				+ " join fetch p.precos precos "
+				+ " where p.dataLancamento > :data ", Produto.class)
+				.setParameter("data", data);
+		return query.getResultList();
 	}
-	
 }

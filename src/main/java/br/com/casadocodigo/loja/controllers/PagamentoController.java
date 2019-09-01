@@ -5,6 +5,7 @@ import java.util.concurrent.Callable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -31,7 +32,7 @@ public class PagamentoController {
 	private MailSender sender;
 	
 	@RequestMapping(value="/finalizar", method=RequestMethod.POST)
-	public Callable<ModelAndView>  finalizar(RedirectAttributes model){
+	public Callable<ModelAndView>  finalizar(@AuthenticationPrincipal Usuario usr, RedirectAttributes model){
 		return () -> {
 			String uri = "http://book-payment.herokuapp.com/payment";
 			
@@ -39,6 +40,8 @@ public class PagamentoController {
 				String response = restTemplate.postForObject(uri, new DadosPagamento(carrinho.getTotal()), String.class);
 				model.addFlashAttribute("sucesso", response);
 				System.out.println(response);
+				this.carrinho.clean();
+				enviaEmailToUsuario(usr);
 				return new ModelAndView("redirect:/produtos");
 			} catch (HttpClientErrorException e) {
 				e.printStackTrace();
@@ -48,14 +51,13 @@ public class PagamentoController {
 		};
 	}
 	
-	
 	public void enviaEmailToUsuario(Usuario usuario) {
 		SimpleMailMessage email = new SimpleMailMessage();
 		email.setSubject("Compra Finalizada");
-		email.setTo("lucas.marcelino@outlook.com");
-		email.setText("Sua compra foi finalizada.");
-		email.setFrom("lucasmarcelinofr@gmail.com");
-		
-		sender.send(email);
+		email.setTo(usuario.getEmail());
+		email.setText("Sua compra foi finalizada.\n Valor total de: " + carrinho.getTotal());
+		email.setFrom("compras@casadocodigo.com.br");
+//		sender.send(email);
+		System.out.println("envio de email off");
 	}
 }

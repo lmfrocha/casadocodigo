@@ -1,7 +1,5 @@
 package br.com.casadocodigo.loja.controllers;
 
-import java.math.BigDecimal;
-import java.util.Calendar;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -20,7 +18,6 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.casadocodigo.loja.dao.ProdutoDAO;
-import br.com.casadocodigo.loja.dto.ProdutoDTO;
 import br.com.casadocodigo.loja.infra.FileSaver;
 import br.com.casadocodigo.loja.model.Produto;
 import br.com.casadocodigo.loja.model.TipoPreco;
@@ -59,11 +56,8 @@ public class ProdutosController {
 		
 		String path = fileSaver.write("arquivos-sumario", sumario);
 		produto.setSumarioPath(path);
-		
 		dao.gravar(produto);
-		
 		redirectAttributes.addFlashAttribute("sucesso", "Produto cadastrado com sucesso!");
-		
 		return new ModelAndView("redirect:produtos");
 	}
 	

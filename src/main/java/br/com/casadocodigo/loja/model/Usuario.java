@@ -1,30 +1,57 @@
 package br.com.casadocodigo.loja.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
+import javax.management.relation.RoleUnresolved;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 @Entity
-public class Usuario implements UserDetails {
+public class Usuario implements UserDetails, Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private Integer id;
 	private String email;
 	private String nome;
 	private String senha;
+	private String confirmaSenha;
 	
 	@OneToMany(fetch=FetchType.EAGER)
+	@JoinTable(name = "Usuario_Role", 
+		joinColumns= @JoinColumn(name = "id"), 
+		inverseJoinColumns = @JoinColumn(name="role_name"))
 	private List<Role> roles = new ArrayList<Role>();
 
+	
+	public Usuario() {
+		Role roleUser = new Role("ROLE_USER");
+		this.setRoles(Arrays.asList(roleUser));
+	}
+	
+	public Integer getId() {
+		return id;
+	}
+	
+	public void setId(Integer id) {
+		this.id = id;
+	}
+	
 	public String getNome() {
 		return nome;
 	}
@@ -76,6 +103,14 @@ public class Usuario implements UserDetails {
 		return this.email;
 	}
 
+	public String getConfirmaSenha() {
+		return confirmaSenha;
+	}
+	
+	public void setConfirmaSenha(String confirmaSenha) {
+		this.confirmaSenha = confirmaSenha;
+	}
+
 	@Override
 	public boolean isAccountNonExpired() {
 		return true;
@@ -95,6 +130,5 @@ public class Usuario implements UserDetails {
 	public boolean isEnabled() {
 		return true;
 	}
-	
 
 }
