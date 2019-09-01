@@ -6,7 +6,6 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
-import javax.management.relation.RoleUnresolved;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -87,6 +86,14 @@ public class Usuario implements UserDetails, Serializable {
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
+	
+	public String getConfirmaSenha() {
+		return confirmaSenha;
+	}
+	
+	public void setConfirmaSenha(String confirmaSenha) {
+		this.confirmaSenha = confirmaSenha;
+	}
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -101,14 +108,6 @@ public class Usuario implements UserDetails, Serializable {
 	@Override
 	public String getUsername() {
 		return this.email;
-	}
-
-	public String getConfirmaSenha() {
-		return confirmaSenha;
-	}
-	
-	public void setConfirmaSenha(String confirmaSenha) {
-		this.confirmaSenha = confirmaSenha;
 	}
 
 	@Override

@@ -58,7 +58,7 @@ public class ProdutosController {
 		produto.setSumarioPath(path);
 		dao.gravar(produto);
 		redirectAttributes.addFlashAttribute("sucesso", "Produto cadastrado com sucesso!");
-		return new ModelAndView("redirect:produtos");
+		return new ModelAndView("redirect:/produtos");
 	}
 	
 	@RequestMapping(method=RequestMethod.GET)

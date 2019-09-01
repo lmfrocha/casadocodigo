@@ -13,11 +13,6 @@ public class ProdutoDTO {
 	private Integer quantidade;
 	
 	private List<Produto> produtos = new ArrayList<>();
-
-	@Deprecated
-	private void ProdutoDto() {
-
-	}
 	
 	public ProdutoDTO(Calendar dataGeracao, Integer quantidade, List<Produto> produtos) {
 		this.dataGeracao = dataGeracao;
@@ -27,7 +22,6 @@ public class ProdutoDTO {
 
 	public ProdutoDTO() {
 	}
-	
 
 	public Calendar getDataGeracao() {
 		return dataGeracao;
@@ -57,8 +51,5 @@ public class ProdutoDTO {
 	public String toString() {
 		return "ProdutoDTO [dataGeracao=" + dataGeracao + ", quantidade=" + quantidade + ", produtos=" + produtos + "]";
 	}
-	
-	
-	
 	
 }

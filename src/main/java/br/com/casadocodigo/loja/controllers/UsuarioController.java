@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -80,10 +81,13 @@ public class UsuarioController {
 		return modelAndView;
 	}
 	
-	@RequestMapping(value = "/atualizaRoles")
-	public ModelAndView atualizaRules (String id, @RequestParam("roles") List<String> roles, RedirectAttributes redirectAttributes ) {
+	@RequestMapping(value = "/atualizaRoles", method=RequestMethod.POST)
+	public ModelAndView atualizaRoles (String id,@RequestParam("roles") List<String> roles, 
+				RedirectAttributes redirectAttributes ) {
 		
-		Usuario usr = usuarioDao.find(Integer.parseInt(id));
+		String param = id.replaceAll(",", "");
+		
+		Usuario usr = usuarioDao.find(Integer.parseInt(param));
 		List<Role> rolesModificadas = new ArrayList<Role>();
 		
 		roles.forEach( r -> {
@@ -95,7 +99,7 @@ public class UsuarioController {
 		usr.setRoles(rolesModificadas);
 		redirectAttributes.addFlashAttribute("message", "Roles atualizadas com sucesso!");
 		
-		ModelAndView modelAndView = new ModelAndView("redirect/usuarios");
+		ModelAndView modelAndView = new ModelAndView("redirect:/usuarios");
 		return modelAndView;
 	}
 	

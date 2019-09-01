@@ -17,18 +17,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableTransactionManagement
 public class JPAConfiguration {
 
-	/*
-	 * 
-	insert into Role values ('ROLE_ADMIN');
-	
-	insert into Usuario (email, nome, senha) values 
-		('admin@casadocodigo.com.br', 'Administrador', '$2a$04$qP517gz1KNVEJUTCkUQCY.JzEoXzHFjLAhPQjrg5iP6Z/UmWjvUhq');
-	
-	insert into Usuario_Role(Usuario_email, roles_nome) values 
-	('admin@casadocodigo.com.br', 'ROLE_ADMIN');
-
-	 * */
-	
 	@Bean
 	public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource) {
 		LocalContainerEntityManagerFactoryBean factoryBean = 
@@ -55,10 +43,8 @@ public class JPAConfiguration {
 	@Profile("dev")
 	private DataSource dataSource() {
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
-//		dataSource.setUsername("root");
-//		dataSource.setPassword("");
 		dataSource.setUsername("root");
-		dataSource.setPassword("@marcelino");
+		dataSource.setPassword("root");
 		dataSource.setUrl("jdbc:mysql://localhost/casadocodigo?useSSL=false&serverTimezone=UTC");
 		dataSource.setDriverClassName("com.mysql.jdbc.Driver");
 		return dataSource;

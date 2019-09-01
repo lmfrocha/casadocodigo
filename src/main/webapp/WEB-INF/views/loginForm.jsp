@@ -23,7 +23,7 @@
         <h1>Login Casa do Código</h1>
         <form:form servletRelativeAction="/login" method="post">
             <div class="form-group">
-                <label>Nome</label>
+                <label>Email</label>
                 <input type="text" name="username" class="form-control" />
             </div>
             <div class="form-group">

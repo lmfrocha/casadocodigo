@@ -28,6 +28,7 @@ public class PagamentoController {
 	@Autowired
 	RestTemplate restTemplate;
 	
+	@SuppressWarnings("unused")
 	@Autowired
 	private MailSender sender;
 	
@@ -41,7 +42,7 @@ public class PagamentoController {
 				model.addFlashAttribute("sucesso", response);
 				System.out.println(response);
 				this.carrinho.clean();
-				enviaEmailToUsuario(usr);
+//				enviaEmailToUsuario(usr);
 				return new ModelAndView("redirect:/produtos");
 			} catch (HttpClientErrorException e) {
 				e.printStackTrace();

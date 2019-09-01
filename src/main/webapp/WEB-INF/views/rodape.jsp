@@ -2,7 +2,7 @@
   <div class="clearfix container">
 	<div id="collections-footer">
 		<!-- cdc-footer -->
-		<p class="footer-title">Coleções de Programação</p>
+		<p class="footer-title">Coleções de Programaçãoo</p>
 		<ul class="footer-text-links">
 			<li><a href="/collections/livros-de-java">Java</a></li>
 			<li><a href="/collections/livros-desenvolvimento-web">Desenvolvimento Web</a></li>
@@ -23,7 +23,7 @@
 			<li><a href="http://livros.casadocodigo.com.br" rel="nofollow">Meus E-books</a></li>
 			<li><a href="/pages/sobre-a-casa-do-codigo">Sobre a Casa do Código</a></li>
 			<li><a href="/pages/perguntas-frequentes">Perguntas Frequentes</a></li>
-			<li><a href="https://www.caelum.com.br">Caelum - Ensino e Inovação</a></li>
+			<li><a href="https://www.caelum.com.br">Caelum - Ensino e Inovaçãoo</a></li>
 			<li><a href="http://www.codecrushing.com/" rel="nofollow">Code Crushing</a></li>
 			<li><a href="http://www.casadocodigo.com.br/pages/politica-de-privacidade" rel="nofollow">Política de Privacidade</a></li>
 		</ul>

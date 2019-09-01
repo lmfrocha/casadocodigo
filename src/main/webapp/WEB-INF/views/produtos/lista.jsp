@@ -3,6 +3,7 @@
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="s"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="security" %>
 
 
@@ -59,13 +60,17 @@
 			<tr>
 				<th>Título</th>
 				<th>Descrição</th>
+				<th>Preços</th> 
 				<th>Páginas</th>
+				<th>Data de Lançamento</th>
 			</tr>
 			<c:forEach items="${produtos }" var="produto">
 				<tr>
 					<td><a href="${s:mvcUrl('PC#detalhe').arg(0, produto.id).build() }">${produto.titulo }</a> </td>
 					<td>${produto.descricao }</td>
+					<td>${produto.precos }</td>
 					<td>${produto.paginas }</td>
+					<td><fmt:formatDate value="${produto.dataLancamento.time }" pattern="dd/MM/yyyy"/></td>
 				</tr>
 			</c:forEach>
 		</table>

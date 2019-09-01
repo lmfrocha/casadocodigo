@@ -37,7 +37,7 @@ public class Preco {
 
 	@Override
 	public String toString() {
-		return "Preco [valor=" + valor + ", tipo=" + tipo + "]";
+		return "Preço: Valor: " + valor + ", tipo: " + tipo;
 	}
 	
 }
